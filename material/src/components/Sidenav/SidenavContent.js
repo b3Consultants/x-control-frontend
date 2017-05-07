@@ -93,29 +93,8 @@ class SidebarContent extends React.Component {
       <ul className="nav" ref={(c) => { this.nav = c; }}>
         <li className="nav-header"><span>Navigation</span></li>
         <li><FlatButton href="#/app/dashboard"><i className="nav-icon material-icons">dashboard</i><span className="nav-text">Dashboard</span></FlatButton></li>
-        <li>
-          <FlatButton href="#/app/ui"><i className="nav-icon material-icons">folder_open</i><span className="nav-text">UI Kit</span></FlatButton>
-          <ul>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/buttons"><span>Buttons</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/cards"><span>Cards</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/boxes"><span>Boxes</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/icons"><span>Icons</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/icon-boxes"><span>Icon Boxes</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/lists"><span>Lists</span><span className="badge badge-pill badge-success">9</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/pricing-tables"><span>Pricing Tables</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/timeline"><span>Timeline</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/feature-callouts"><span>Feature Callouts</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/components"><span>Components</span><span className="badge badge-pill badge-danger">11</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/menus"><span>Menus</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/hover"><span>Hover</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/sashes"><span>Sashes</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/testimonials"><span>Testimonials</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/call-to-actions"><span>Call to Actions</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/typography"><span>Typography</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/grids"><span>Grids</span></FlatButton></li>
-            <li><FlatButton className="prepend-icon" href="#/app/ui/colors"><span>Colors</span></FlatButton></li>
-          </ul>
-        </li>
+        <li><FlatButton href="#/app/listeners"><i className="nav-icon material-icons">hearing</i><span className="nav-text">Listeners</span></FlatButton></li>
+        <li><FlatButton href="#/app/likes"><i className="nav-icon material-icons">thumbs_up_down</i><span className="nav-text">Listeners</span></FlatButton></li>
         <li>
           <FlatButton href="#/app/form"><i className="nav-icon material-icons">mode_edit</i><span className="nav-text">Forms</span></FlatButton>
           <ul>

@@ -11,6 +11,7 @@ module.exports = {
         require('./routes/pages'),
         require('./routes/tables'),
         require('./routes/ui'),
+        require('./routes/listeners')
       ]);
     });
   },

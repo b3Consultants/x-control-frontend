@@ -44,7 +44,7 @@ class Header extends React.Component {
             <h2><Link to="/">{APPCONFIG.brand}</Link></h2>
           </div>
 
-          <div className="top-nav-left hidden-md-down">
+          <div className="top-nav-left">
             <NavLeftList />
           </div>
 
@@ -66,4 +66,3 @@ const mapStateToProps = state => ({
 module.exports = connect(
   mapStateToProps
 )(Header);
-
