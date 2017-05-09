@@ -1,5 +1,6 @@
 module.exports = {
   path: 'app',
+  indexRoute: { onEnter: (nextState, replace) => replace('/app/dashboard') },
   getChildRoutes(partialNextState, cb) {
     require.ensure([], (require) => {
       cb(null, [
@@ -11,7 +12,8 @@ module.exports = {
         require('./routes/pages'),
         require('./routes/tables'),
         require('./routes/ui'),
-        require('./routes/listeners')
+        require('./routes/listeners'),
+        require('./routes/likes')
       ]);
     });
   },

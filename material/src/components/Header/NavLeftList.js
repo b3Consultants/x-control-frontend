@@ -5,6 +5,7 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import { hashHistory } from 'react-router';
 import Divider from 'material-ui/Divider';
 import axios from 'axios';
+import ReactInterval from 'react-interval';
 
 const HeaderIconButtonStyle = {
   width: '60px',
@@ -20,55 +21,40 @@ const songNameStyle = {
   marginLeft: '10%'
 };
 
-function songName() {
-  console.log('h');
-  axios.get('http://localhost:8080/listeners/getRadioInfo')
-    .then((response) => {
-      console.log(response);
-      const radio = JSON.parse(response.data);
-      return radio.songtitle;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
 
-class NavLeftList extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      song_name: 'a'
+const NavLeftList = React.createClass({
+  getInitialState() {
+    return { enabled: true,
+      timeout: 10000,
+      songName: ''
     };
-  }
+
+  },
 
   getSongName() {
-    axios.get('http://localhost:8080/listeners/getRadioInfo')
+    axios.get('http://localhost:8080/realtime/song')
       .then((response) => {
-        console.log(response);
-        const radio = JSON.parse(response.data);
+        const radio = response.data;
         this.setState({
-          song_name: radio.songtitle
+          songName: radio
         });
       })
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  handleChange = (event, value) => {
-    hashHistory.push(value);
-  }
+  },
 
   render() {
+    const {timeout, enabled, songName} = this.state;
     return (
-      <ul className="list-unstyled list-inline">
-        <li className="list-inline-item">
-          {this.getSongName()}
-          <p className="h4 navbar-brand" style={songNameStyle}>{this.state.song_name}</p>
-        </li>
-      </ul>
-    );
+      <div>
+        <ReactInterval {...{timeout, enabled}} callback={this.getSongName} />
+        <ul className="list-unstyled list-inline">
+          <li className="list-inline-item">
+            <p className="h4 navbar-brand" style={songNameStyle}> {songName}</p>
+          </li>
+        </ul>
+      </div>);
   }
-}
-
+});
 module.exports = NavLeftList;
