@@ -9,11 +9,15 @@ import elementResizeEvent from 'element-resize-event';
 
 const area = {};
 area.options = {
+  title : {
+        text: 'Listeners',
+        subtext: 'actuales '
+    },
   tooltip: {
     trigger: 'axis'
   },
   legend: {
-    data: ['Acquisition', 'Revenue'],
+    data: ['Cantidad', 'Dispositivo'],
     textStyle: {
       color: CHARTCONFIG.color.text
     }
@@ -97,7 +101,7 @@ function maxof(array) {
 function getInfo() {
   axios.get('http://localhost:8080/realtime/getListenersInfo')
     .then((response) => {
-      const array = [response.data.mobile, response.data.desktop, response.data.other];
+      const array = [response.data.mobile, response.data.desktop, response.data.others];
       area.options.series[0].data = array;
       area.options.yAxis[0].max = maxof(array);
     })
@@ -181,11 +185,13 @@ class ListenersChart extends React.Component {
     // init the echart object
     const echartObj = this.getEchartsInstance();
     // set the echart option
+    area.options.series[0].data = [this.props.mobile, this.props.desktop, this.props.other]
+    area.options.yAxis[0].max = maxof([this.props.mobile, this.props.desktop, this.props.other]);
     echartObj.setOption(area.options);
-    setInterval(function () {
-      getInfo();
-      echartObj.setOption(area.options);
-    }, 5000);
+  //  setInterval(function () {
+    //  getInfo();
+      //echartObj.setOption(area.options);
+    //}, 5000);
     // set loading mask
     if (this.props.showLoading) echartObj.showLoading(this.props.loadingOption || null);
     else echartObj.hideLoading();

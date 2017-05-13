@@ -6,6 +6,7 @@ import APPCONFIG from 'constants/Config';
 import NavLeftList from './NavLeftList';
 import NavRightList from './NavRightList';
 
+const style = { backgroundcolor: 'red'};
 
 class Header extends React.Component {
   componentDidMount() {
@@ -25,14 +26,8 @@ class Header extends React.Component {
     return (
       <section className="app-header">
         <div
-          className={classnames('app-header-inner', {
-            'bg-color-light': ['11', '12', '13', '14', '15', '16', '21'].indexOf(colorOption) >= 0,
-            'bg-color-dark': colorOption === '31',
-            'bg-color-primary': ['22', '32'].indexOf(colorOption) >= 0,
-            'bg-color-success': ['23', '33'].indexOf(colorOption) >= 0,
-            'bg-color-info': ['24', '34'].indexOf(colorOption) >= 0,
-            'bg-color-warning': ['25', '35'].indexOf(colorOption) >= 0,
-            'bg-color-danger': ['26', '36'].indexOf(colorOption) >= 0 })}
+          className={classnames('app-header-inner')}
+          style={style}
                 >
           <div className="hidden-lg-up float-left">
             <a href="javascript:;" className="md-button header-icon toggle-sidebar-btn" ref={(c) => { this.sidebarBtn = c; }}>

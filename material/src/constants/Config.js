@@ -2,7 +2,7 @@ const date = new Date();
 const year = date.getFullYear();
 
 const APPCONFIG = {
-  brand: 'Material',
+  brand: 'La X',
   user: 'Lisa',
   year,
   productLink: 'https://themeforest.net/item/material-design-reactjs-admin-web-app-with-bootstrap-4/19582625',
@@ -13,7 +13,7 @@ const APPCONFIG = {
     info: '#66BB6A',
     infoAlt: '#7E57C2',
     warning: '#FFCA28',
-    danger: '#F44336',
+    danger: '#C10A13',
     text: '#3D4051',
     gray: '#EDF0F1'
   },

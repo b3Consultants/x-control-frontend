@@ -32,9 +32,9 @@ const NavLeftList = React.createClass({
   },
 
   getSongName() {
-    axios.get('http://localhost:8080/realtime/song')
+    axios.get('http://localhost:8080/realtime/getRadioActualState')
       .then((response) => {
-        const radio = response.data;
+        const radio = response.data.song;
         this.setState({
           songName: radio
         });

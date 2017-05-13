@@ -16,7 +16,7 @@ const Colors = () => (
           <li className="color dark" style={{backgroundColor: '#ffcdd2'}}><span className="shade">100</span><span className="hex">#ffcdd2</span></li>
           <li className="color dark" style={{backgroundColor: '#ef9a9a'}}><span className="shade expanded">200</span><span className="hex">#ef9a9a</span></li>
           <li className="color dark" style={{backgroundColor: '#e57373'}}><span className="shade">300</span><span className="hex">#e57373</span></li>
-          <li className="color" style={{backgroundColor: '#ef5350'}}><span className="shade expanded">400</span><span className="hex">#ef5350</span></li>
+          <li className="color" style={{backgroundColor: '##C10A13'}}><span className="shade expanded">400</span><span className="hex">#ef5350</span></li>
           <li className="color" style={{backgroundColor: '#f44336'}}><span className="shade">500</span><span className="hex">#f44336</span></li>
           <li className="color" style={{backgroundColor: '#e53935'}}><span className="shade expanded">600</span><span className="hex">#e53935</span></li>
           <li className="color" style={{backgroundColor: '#d32f2f'}}><span className="shade">700</span><span className="hex">#d32f2f</span></li>
