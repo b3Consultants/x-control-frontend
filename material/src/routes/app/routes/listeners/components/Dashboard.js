@@ -1,6 +1,6 @@
 import React from 'react';
 import QueueAnim from 'rc-queue-anim';
-import KPIsChart from './KPIsChart';
+import ListenersPieChart from './ListenersPieChart';
 import axios from 'axios';
 import AquisitionChart from './AquisitionChart';
 import StatBoxes from './StatBoxes';
@@ -8,20 +8,44 @@ import EngagementStats from './EngagementStats';
 import BenchmarkChart from './BenchmarkChart';
 
 class Main extends React.Component {
+
+  getListenersHistory(update) {
+    axios.get('http://localhost:8080/realtime/ListenersHistory')
+      .then((response) => {
+
+        this.setState({dates: response.data.dates,
+          mobile: response.data.mobile,
+          desktop: response.data.desktop,
+          other: response.data.others,
+          doUpdate: update});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  componentDidMount() {
+    let update = true;
+    setInterval(() => {
+      this.getListenersHistory(update);
+      update = false;
+    }, 1000);
+  }
+
+
   render() {
     return (
       <div className="row">
         <div className="col-xl-6">
           <div className="box box-default">
             <div className="box-body">
-              <KPIsChart {...this.props} />
+              <ListenersPieChart {...this.props} />
             </div>
           </div>
         </div>
         <div className="col-xl-6">
           <div className="box box-default">
             <div className="box-body">
-              <AquisitionChart {...this.props} />
+              <AquisitionChart{...this.state} />
             </div>
           </div>
         </div>

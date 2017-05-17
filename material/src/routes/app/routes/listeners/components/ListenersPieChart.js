@@ -7,86 +7,36 @@ import 'echarts/theme/macarons';
 
 import elementResizeEvent from 'element-resize-event';
 
-const area = {};
-area.options = {
-  title : {
-        text: 'Listeners',
-        subtext: 'actuales '
+const option = {
+   color: ['red','green', 'yellow'],
+    title : {
+        text: 'Listeners Actuales',
+        x:'center'
     },
-  tooltip: {
-    trigger: 'axis'
-  },
-  legend: {
-    data: ['Cantidad', 'Dispositivo'],
-    textStyle: {
-      color: CHARTCONFIG.color.text
-    }
-  },
-  toolbox: {
-    show: false
-  },
-  calculable: true,
-  xAxis: [
-    {
-      type: 'category',
-      data: ['Movil', 'Desktop.', 'Otros.'],
-      axisLabel: {
-        textStyle: {
-          color: CHARTCONFIG.color.text
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient : 'vertical',
+        x : 'left',
+        data:['Movil','Desktop','Otros']
+    },
+    calculable : true,
+    series : [
+        {
+            name:'Dispositivo',
+            type:'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data: [
+                {value:0, name: ''},
+                {value:0, name: ''},
+                {value:0, name: ''},
+
+            ]
         }
-      },
-      splitLine: {
-        lineStyle: {
-          color: CHARTCONFIG.color.splitLine
-        }
-      }
-    }
-  ],
-  yAxis: [
-    {
-      max: 3000,
-      axisLabel: {
-        textStyle: {
-          color: CHARTCONFIG.color.text
-        }
-      },
-      splitLine: {
-        lineStyle: {
-          color: CHARTCONFIG.color.splitLine
-        }
-      },
-      splitArea: {
-        show: true,
-        areaStyle: {
-          color: CHARTCONFIG.color.splitArea
-        }
-      }
-    }
-  ],
-  series: [
-    {
-      name: 'Usuarios',
-      type: 'bar',
-      barCategoryGap: '35%',
-      data: [0, 0, 0],
-      itemStyle: {
-        normal: {
-          color: CHARTCONFIG.color.success
-        }
-      },
-      lineStyle: {
-        normal: {
-          color: CHARTCONFIG.color.success
-        }
-      },
-      areaStyle: {
-        normal: {
-          color: CHARTCONFIG.color.success
-        }
-      },
-      symbol: 'diamond'
-    }
-  ]
+    ]
 };
 
 function maxof(array) {
@@ -98,23 +48,6 @@ function maxof(array) {
   }
   return max;
 }
-function getInfo() {
-  axios.get('http://localhost:8080/realtime/getListenersInfo')
-    .then((response) => {
-      const array = [response.data.mobile, response.data.desktop, response.data.others];
-      area.options.series[0].data = array;
-      area.options.yAxis[0].max = maxof(array);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
-
-setInterval(() => {
-  getInfo();
-}, 1000);
-
-
 class ListenersChart extends React.Component {
   propTypes: {
     option: PropTypes.object.isRequired,
@@ -128,7 +61,6 @@ class ListenersChart extends React.Component {
     loadingOption: PropTypes.object,
     onEvents: PropTypes.object
   }
-
   // first add
   componentDidMount() {
     const echartObj = this.renderEchartDom();
@@ -185,13 +117,9 @@ class ListenersChart extends React.Component {
     // init the echart object
     const echartObj = this.getEchartsInstance();
     // set the echart option
-    area.options.series[0].data = [this.props.mobile, this.props.desktop, this.props.other]
-    area.options.yAxis[0].max = maxof([this.props.mobile, this.props.desktop, this.props.other]);
-    echartObj.setOption(area.options);
-  //  setInterval(function () {
-    //  getInfo();
-      //echartObj.setOption(area.options);
-    //}, 5000);
+    option.series[0].data =  [{value: this.props.mobile, name: 'Movil' }, {value: this.props.desktop, name: 'Desktop'}, {value: this.props.other, name: 'Otros'}];
+    echartObj.setTheme({color:['red','green','yellow']});
+    echartObj.setOption(option);
     // set loading mask
     if (this.props.showLoading) echartObj.showLoading(this.props.loadingOption || null);
     else echartObj.hideLoading();
