@@ -22,7 +22,7 @@ class Statboxes extends React.Component{
         <div className="col-xl-3 col-sm-6">
           <div className="box box-default">
             <div className="box-top">
-              <span>3.2<span className="size-h5"></span>hs</span>
+              <span>{Math.round(parseInt(this.props.averageTime, 10) / 3600).toFixed(1)} <span className="size-h5"> </span>hs </span>
             </div>
             <div className="box-info">
               <span>Tiempo Promedio</span>
@@ -35,7 +35,7 @@ class Statboxes extends React.Component{
         <div className="col-xl-3 col-sm-6">
           <div className="box box-default">
             <div className="box-top">
-              <span>37<span className="size-h5">k</span></span>
+              <span>{this.props.peak}<span className="size-h5"></span></span>
             </div>
             <div className="box-info">
               <span>Pico de listeners</span>

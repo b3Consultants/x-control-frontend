@@ -111,7 +111,10 @@ class Dashboard extends React.Component {
           mobile: response.data.mobile,
           desktop: response.data.desktop,
           other: response.data.others,
-          listeners: response.data.listeners});
+          listeners: response.data.listeners,
+          averageTime: response.data.averageTime,
+          peak: response.data.peak
+        });
       })
       .catch((err) => {
         console.log(err);
