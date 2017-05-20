@@ -6,6 +6,7 @@ import { hashHistory } from 'react-router';
 import Divider from 'material-ui/Divider';
 import axios from 'axios';
 import ReactInterval from 'react-interval';
+import APPCONFIG from 'constants/Config';
 
 const HeaderIconButtonStyle = {
   width: '60px',
@@ -32,7 +33,8 @@ const NavLeftList = React.createClass({
   },
 
   getSongName() {
-    axios.get('http://localhost:8080/realtime/getRadioActualState')
+
+    axios.get(APPCONFIG.baseURL + '/realtime/getRadioActualState')
       .then((response) => {
         const radio = response.data.song;
         this.setState({

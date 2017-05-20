@@ -1,7 +1,8 @@
 import React from 'react';
+import APPCONFIG from 'constants/Config';
 import QueueAnim from 'rc-queue-anim';
-import ListenersPieChart from './ListenersPieChart';
 import axios from 'axios';
+import ListenersPieChart from './ListenersPieChart';
 import AquisitionChart from './AquisitionChart';
 import StatBoxes from './StatBoxes';
 import EngagementStats from './EngagementStats';
@@ -10,7 +11,7 @@ import BenchmarkChart from './BenchmarkChart';
 class Main extends React.Component {
 
   getListenersHistory(update) {
-    axios.get('http://localhost:8080/realtime/ListenersHistory')
+    axios.get(APPCONFIG.baseURL + '/realtime/ListenersHistory')
       .then((response) => {
 
         this.setState({dates: response.data.dates,
@@ -24,11 +25,12 @@ class Main extends React.Component {
       });
   }
   componentDidMount() {
-    let update = true;
-    setInterval(() => {
-      this.getListenersHistory(update);
-      update = false;
-    }, 1000);
+    this.getListenersHistory(true);
+    this.getListenersHistory(false);
+
+  }
+  componentWillUnmount() {
+
   }
 
 
@@ -104,9 +106,8 @@ class Dashboard extends React.Component {
 
 
   getInfo() {
-    axios.get('http://localhost:8080/realtime/getRadioActualState')
+    axios.get(APPCONFIG.baseURL + '/realtime/getRadioActualState')
       .then((response) => {
-        const array = [response.data.mobile, response.data.desktop, response.data.other];
         this.setState({song: response.data.song,
           mobile: response.data.mobile,
           desktop: response.data.desktop,
@@ -122,10 +123,13 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    const inter = setInterval(() => {
       this.getInfo();
     }, 1000);
-
+    this.setState({interval: inter});
+  }
+  componentWillUnmount() {
+    clearInterval(this.state.interval);
   }
   render() {
     return (<div className="container-fluid no-breadcrumbs page-dashboard">
