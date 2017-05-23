@@ -2,8 +2,8 @@ import React from 'react';
 import APPCONFIG from 'constants/Config';
 import QueueAnim from 'rc-queue-anim';
 import axios from 'axios';
-import ListenersPieChart from './ListenersPieChart';
-import LikesChart from './LikesChart';
+import LikesPieChart from './LikesChart';
+import AquisitionChart from './CurrentLikesChart';
 import StatBoxes from './StatBoxes';
 import EngagementStats from './EngagementStats';
 import BenchmarkChart from './BenchmarkChart';
@@ -34,20 +34,21 @@ class Main extends React.Component {
     clearInterval(this.state.interval);
   }
 
+
   render() {
     return (
       <div className="row">
         <div className="col-xl-6">
           <div className="box box-default">
             <div className="box-body">
-              <ListenersPieChart {...this.props} />
+              <LikesPieChart {...this.props} />
             </div>
           </div>
         </div>
         <div className="col-xl-6">
           <div className="box box-default">
             <div className="box-body">
-              <LikesChart{...this.state} />
+              <AquisitionChart{...this.state} />
             </div>
           </div>
         </div>
@@ -120,6 +121,15 @@ class Dashboard extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+      axios.get(APPCONFIG.baseURL + '/likes')
+        .then((response) => {
+          this.setState({mata: response.data.mata,
+            apesta: response.data.apesta,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }
 
   componentDidMount() {

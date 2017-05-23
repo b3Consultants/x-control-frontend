@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link, hashHistory } from 'react-router';
 import APPCONFIG from 'constants/Config';
+
 import {
     togglCollapsedNav
 } from '../../actions';
@@ -46,42 +47,23 @@ class Sidebar extends React.Component {
             >
         <section
           className={classnames('sidebar-header', {
-            'bg-color-dark': ['11', '31'].indexOf(colorOption) >= 0,
-            'bg-color-light': colorOption === '21',
-            'bg-color-primary': ['12', '22', '32'].indexOf(colorOption) >= 0,
-            'bg-color-success': ['13', '23', '33'].indexOf(colorOption) >= 0,
-            'bg-color-info': ['14', '24', '34'].indexOf(colorOption) >= 0,
-            'bg-color-warning': ['15', '25', '35'].indexOf(colorOption) >= 0,
-            'bg-color-danger': ['16', '26', '36'].indexOf(colorOption) >= 0 })}
+            'bg-color-dark': false,
+            'bg-color-light': false,
+            'bg-color-primary': false,
+            'bg-color-success': false,
+            'bg-color-info': false,
+            'bg-color-warning': false,
+            'bg-color-danger': true })}
                 >
-          <svg className="logo-img logo-react" viewBox="0 0 3925 3525" version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <circle className="react-dot" stroke="none" cx="1960" cy="1760" r="355" />
-            <g className="react-curve" strokeWidth="170" fill="none">
-              <ellipse cx="2575" cy="545" rx="715" ry="1875" transform="rotate(30)" />
-              <ellipse cx="1760" cy="-1960" rx="715" ry="1875" transform="rotate(90)" />
-              <ellipse cx="-815" cy="-2505" rx="715" ry="1875" transform="rotate(-210)" />
-            </g>
-          </svg>
+          <img className="logo-img logo-react" src="assets/images/X_icon.jpg" alt="" />
           <Link to="/" className="brand">{APPCONFIG.brand}</Link>
-          <a href="javascript:;" className="collapsednav-toggler" onClick={this.onToggleCollapsedNav}>
-            {toggleIcon}
-          </a>
+
         </section>
 
         <section className="sidebar-content">
           <SidenavContent />
         </section>
 
-        <section className="sidebar-footer">
-          <ul className="nav">
-            <li>
-              <a target="_blank" href={APPCONFIG.productLink}>
-                <i className="nav-icon material-icons">help</i>
-                <span className="nav-text"><span>Help</span> & <span>Support</span></span>
-              </a>
-            </li>
-          </ul>
-        </section>
       </nav>
     );
   }
@@ -102,4 +84,3 @@ module.exports = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Sidebar);
-

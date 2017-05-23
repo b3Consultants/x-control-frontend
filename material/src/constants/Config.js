@@ -2,8 +2,9 @@ const date = new Date();
 const year = date.getFullYear();
 
 const APPCONFIG = {
-  brand: 'Material',
+  brand: 'La X',
   user: 'Lisa',
+  baseURL:'http://localhost:8080',
   year,
   productLink: 'https://themeforest.net/item/material-design-reactjs-admin-web-app-with-bootstrap-4/19582625',
   AutoCloseMobileNav: true,                         // true, false. Automatically close sidenav on route change (Mobile only)
@@ -13,7 +14,7 @@ const APPCONFIG = {
     info: '#66BB6A',
     infoAlt: '#7E57C2',
     warning: '#FFCA28',
-    danger: '#F44336',
+    danger: '#C10A13',
     text: '#3D4051',
     gray: '#EDF0F1'
   },
