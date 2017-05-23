@@ -2,35 +2,36 @@ import React from 'react';
 import APPCONFIG from 'constants/Config';
 import QueueAnim from 'rc-queue-anim';
 import axios from 'axios';
-import ListenersPieChart from './ListenersPieChart';
-import AquisitionChart from './AquisitionChart';
+import LikesPieChart from './LikesChart';
+import AquisitionChart from './CurrentLikesChart';
 import StatBoxes from './StatBoxes';
 import EngagementStats from './EngagementStats';
 import BenchmarkChart from './BenchmarkChart';
 
 class Main extends React.Component {
 
-  getListenersHistory(update) {
-    axios.get(APPCONFIG.baseURL + '/realtime/ListenersHistory')
+  getAcutalLikes(update) {
+    axios.get(APPCONFIG.baseURL + '/likes/' + this.props.song)
       .then((response) => {
 
-        this.setState({dates: response.data.dates,
-          mobile: response.data.mobile,
-          desktop: response.data.desktop,
-          other: response.data.others,
-          doUpdate: update});
+        this.setState({mata_song: response.data.mata,
+          apesta_song: response.data.apesta,
+        });
       })
       .catch((err) => {
         console.log(err);
       });
   }
   componentDidMount() {
-    this.getListenersHistory(true);
-    this.getListenersHistory(false);
+    const inter = setInterval(() => {
+      this.getAcutalLikes();
+    }, 1000);
+    this.setState({interval: inter});
+
 
   }
   componentWillUnmount() {
-
+    clearInterval(this.state.interval);
   }
 
 
@@ -40,7 +41,7 @@ class Main extends React.Component {
         <div className="col-xl-6">
           <div className="box box-default">
             <div className="box-body">
-              <ListenersPieChart {...this.props} />
+              <LikesPieChart {...this.props} />
             </div>
           </div>
         </div>
@@ -120,6 +121,15 @@ class Dashboard extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+      axios.get(APPCONFIG.baseURL + '/likes')
+        .then((response) => {
+          this.setState({mata: response.data.mata,
+            apesta: response.data.apesta,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }
 
   componentDidMount() {
@@ -136,7 +146,6 @@ class Dashboard extends React.Component {
       <QueueAnim type="bottom" className="ui-animate">
         <Main {...this.state} />
         <div key="2"><StatBoxes {...this.state} /></div>
-        <div key="3"><Engagement {...this.state} /></div>
       </QueueAnim>
     </div>);
   }
